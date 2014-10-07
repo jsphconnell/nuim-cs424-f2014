@@ -11,7 +11,7 @@
     (lambda (x y)
       (f c x y))))
 
-(define zip3 (fill-in-1st-of-3 my-map2 list))
+(define zip3 (fill-in-1st-of-3 map list))
 
 ;;; 'SOMETHING  is read by Scheme as   (quote SOMETHING)
 
