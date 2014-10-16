@@ -11,25 +11,27 @@
 ;;; (* e1 e2)         (+ (* e1 (d e2 x)) (* (d e1 x) e2))
 ;;; (recip e)         (* -1 (* (* (recip e) (recip e)) (d e x)))
 
+(define diff-table
+  (list (list '+ (lambda (e1 e2 d1 d2) (s+ d1 d2)))
+	(list '* (lambda (e1 e2 d1 d2) (s+ (s* e1 d2) (s* d1 e2))))
+	(list 'recip (lambda (e d) (s* -1
+				       (s* (s* (s-recip e)
+					       (s-recip e))
+					   d))))
+	(list 'sin (lambda (e d) (s* (s-cos e) d)))
+	(list 'cos (lambda (e d) (s* -1 (s* (s-sin e) d))))))
+
 (define d
   (lambda (e x)
     (cond ((equal? e x) 1)
 	  ((number? e) 0)
 	  ((symbol? e) 0)
-	  (else (let ((o (car e))
-		      (ds (map (lambda (e) (d e x)) (cdr e))))
-		  (cond ((equal? o '+)
-			 (s+ (car ds) (cadr ds)))
-			((equal? o '*)
-			 (let ((e1 (cadr e)) (e2 (caddr e)))
-			   (s+ (s* e1 (cadr ds))
-			       (s* (car ds) e2))))
-			((equal? o 'recip)
-			 (s* -1 (s* (s* e e) (car ds))))
-			((equal? o 'sin)
-			 (s* (s-cos (cadr e)) (car ds)))
-			((equal? o 'cos)
-			 (s* -1 (s* (s-sin (cadr e)) (car ds))))
+	  (else (let ((entry (assoc (car e) diff-table)))
+		  (cond (entry
+			 (apply (cadr entry)
+				(append (cdr e)
+					(map (lambda (e) (d e x))
+					     (cdr e)))))
 			(else (error "unknown expression type:" e))))))))
 
 (define s+
