@@ -1,6 +1,7 @@
 ;;; What is a "Calculus"?
 
 ;;; Calculus = Pebbles (in Latin)
+;;; We are finding the derivative of an expression e with respect to x
 
 ;;; e                 (d e x)
 ;;; ----------------- -----------------------
@@ -34,6 +35,8 @@
 					     (cdr e)))))
 			(else (error "unknown expression type:" e))))))))
 
+;;; s+ and s* calculate derivative of sum of 2 expressions, and product of 2 expressions respectively.
+;;; Difficult to implement a full-strength arithmetic simplifier...
 (define s+
   (lambda (e1 e2)
     (cond ((and (number? e1)
@@ -120,3 +123,13 @@
 ;; 281474976710656
 ;; > (/ (log (expt 2 48)) (log 10))
 ;; 14.449439791871095
+
+;;; The "sleazy way" to test if our system manipulates the expression properly
+;;; - Give it a complicated test case where we know the correct output.
+;;; - e.g. Plug an x value into an expression you know evaluates to zero. 
+;;; - Above, we called foo with an x value of 72.3. It returns -5.6843418860808015e-14.
+;;;   Floating point errors are to be expected, this result is 'close enough' to zero
+;;;   so we can confirm our system is working as expected. 
+;;;
+;;; Also TDD (Test Driven Development), where we first write test cases to exercise each function,
+;;; and then write the functions to make the tests pass. 
