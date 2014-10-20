@@ -92,18 +92,19 @@
      (λ (x)
 	(f (f (f x))))))
 
-;;; Church encoded number 3
+;;; Church encoded number 1
 (define c-1
   (λ (f)
      (λ (x)
 	(f x))))
 
-;;; Church encoded number 3
+;;; Church encoded number 0
 (define c-0
   (λ (f)
      (λ (x)
 	x)))
 
+;;; Call f(x) once, then n more times
 (define succ
   (λ (n)
      (λ (f)
