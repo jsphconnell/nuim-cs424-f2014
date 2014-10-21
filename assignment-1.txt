@@ -1,0 +1,72 @@
+Assignment 1 - Scheme
+
+PART A
+
+Consider the "church encoded" representation of non-negative integers
+we exhibited in class, where 5 was represented as
+
+  (define church-5 (λ (f) (λ (x) (f (f (f (f (f x))))))))
+
+First, consider modifying the representation be able to handle both
+positive and negative numbers, as follows.
+
+  (define c-int-positive-5 (λ (f g) (λ (x) (f (f (f (f (f x))))))))
+
+  (define c-int-negative-3 (λ (f g) (λ (x) (g (g (g x))))))
+
+Define procedures to to the following:
+
+  ;;; add two numbers
+  (define c-int+ (λ (x y) ...))
+
+  ;;; subtract two numbers
+  (define c-int- (λ (x y) ...))
+
+  ;;; multiply two numbers
+  (define c-int* (λ (x y) ...))
+
+  ;;; power (the second arg must be non-negative)
+  (define c-int* (λ (x n) ...))
+
+  ;;; comparison
+  (define c-int= (λ (d1 d2) ...))
+  (define c-int< (λ (d1 d2) ...))
+  (define c-int> (λ (d1 d2) ...))
+
+PART B
+
+Consider a representation of non-negative integers as a list of
+base-10 digits, in "little endian" order.  So the number 1024 would be
+represented as the list
+
+  (4 2 0 1)
+
+and the number one million would be represented as
+
+  (0 0 0 0 0 0 1)
+
+We will call this a dlnat, for "Digit List Natural Number".
+
+(Aside: this representation is ambiguous because trailing zeros do not
+affect the value represented.  So an alternative representation of
+1024 would be 1024 = 00001024 or (4 2 0 1 0 0 0 0).  Try to avoid
+trailing zeros, but don't go crazy on the issue.)
+
+Define, in "pure" Scheme, procedures to do the following:
+
+  ;;; takes a non-negative integer, returns corresponding dlnat
+  (define nat-to-dlnat (λ (x) ...))
+
+  ;;; takes a dlnat, returns corresponding integer
+  (define dlnat-to-nat (λ (d) ...))
+
+  ;;; add two dlnats
+  (define dl+ (λ (d1 d2) ...))
+
+  ;;; multiply two dlnats
+  (define dl+ (λ (d1 d2) ...))
+
+  ;;; compare two dlnats
+  (define dl= (λ (d1 d2) ...))
+  (define dl< (λ (d1 d2) ...))
+  (define dl> (λ (d1 d2) ...))
