@@ -70,3 +70,10 @@ Define, in "pure" Scheme, procedures to do the following:
   (define dl= (λ (d1 d2) ...))
   (define dl< (λ (d1 d2) ...))
   (define dl> (λ (d1 d2) ...))
+
+Clarification: doing
+
+  (define dl+ (λ (d1 d2) (nat-to-dlnat (+ (dlnat-to-nat d1) (dlnat-to-nat d2)))))
+  (define dl< (λ (d1 d2) (< (dlnat-to-nat d1) (dlnat-to-nat d2))))
+
+is not considered a proper solution.
