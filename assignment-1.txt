@@ -7,14 +7,14 @@ we exhibited in class, where 5 was represented as
 
   (define church-5 (λ (f) (λ (x) (f (f (f (f (f x))))))))
 
-First, consider modifying the representation be able to handle both
+First, consider modifying the representation to be able to handle both
 positive and negative numbers, as follows.
 
   (define c-int-positive-5 (λ (f g) (λ (x) (f (f (f (f (f x))))))))
 
   (define c-int-negative-3 (λ (f g) (λ (x) (g (g (g x))))))
 
-Define procedures to to the following:
+Define procedures to do the following:
 
   ;;; add two numbers
   (define c-int+ (λ (x y) ...))
@@ -76,4 +76,6 @@ Clarification: doing
   (define dl+ (λ (d1 d2) (nat-to-dlnat (+ (dlnat-to-nat d1) (dlnat-to-nat d2)))))
   (define dl< (λ (d1 d2) (< (dlnat-to-nat d1) (dlnat-to-nat d2))))
 
-is not considered a proper solution.
+is not considered a proper solution.  Imagine you are doing this on a
+system where the built-in functions + and * restrict their inputs to
+the ballpark of one decimal digit.
