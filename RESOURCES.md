@@ -16,3 +16,9 @@ implementation so if I see constructs that won't work in mzscheme I'll
 know what's going on.
 
 Stay pure!
+
+Lambda Calculus
+---------------
+
+λ-Calculus class notes by Prof Charles Wells:
+http://www.cwru.edu/artsci/math/wells/pub/pdf/lambda2009.pdf
