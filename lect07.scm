@@ -110,3 +110,11 @@
      (λ (f)
 	(λ (x)
 	   ((n f) (f x))))))
+
+;;; Examples:
+
+;; > ((c-3 (λ (xs) (cons 'foo xs))) '())
+;; (foo foo foo)
+
+;; > (((succ (succ c-1)) (λ (xs) (cons 'foo xs))) '())
+;; (foo foo foo)
