@@ -66,7 +66,7 @@
 	(list '= =)
 	(list 'sin sin)))
 
-;; > (let ((fact (lambda (n) (if (= n 0) 1 (* n (fact (- n 1))))))) (fact 7))
+;; > (let ((fact (λ (n) (if (= n 0) 1 (* n (fact (- n 1))))))) (fact 7))
 ;; reference to undefined identifier: fact
 
 (define test-form '((lambda (fact0) ((fact0 fact0) 7))
@@ -80,16 +80,18 @@
 ;; > (my-eval test-form global-environment)
 ;; 5040
 
-;;; Exercise: make this work!
+;; Version of the Y combinator for a strict language like Scheme:
 
-(define y
-  (lambda (f0)
-    ((f0 (f0 f0)))))
+(define z
+  (λ (f)
+     ((λ (f) (f f))
+      (λ (g)
+	 (f (λ (x) ((g g) x)))))))
 
 (define fact
-  (y (lambda (f0)
-       (lambda (n)
-	 (if (= n 0)
-	     1
-	     (* n
-		(f0 (+ n -1))))))))
+  (z (λ (f)
+	(λ (n)
+	   (if (= n 0)
+	       1
+	       (* n
+		  (f (+ n -1))))))))
