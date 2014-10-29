@@ -26,7 +26,7 @@ Define procedures to do the following:
   (define c-int* (λ (x y) ...))
 
   ;;; power (the second arg must be non-negative)
-  (define c-int* (λ (x n) ...))
+  (define c-int-expt (λ (x n) ...))
 
   ;;; comparison
   (define c-int= (λ (d1 d2) ...))
