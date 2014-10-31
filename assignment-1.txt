@@ -14,7 +14,11 @@ positive and negative numbers, as follows.
 
   (define c-int-negative-3 (λ (f g) (λ (x) (g (g (g x))))))
 
-Define procedures to do the following:
+The idea is that an integer N is represented as a function that takes
+two functions, f and g, and returns a function that applies f N times
+when N≥0 or g |N| times when N≤0.
+
+Define, in "pure" Scheme, procedures to do the following:
 
   ;;; add two numbers
   (define c-int+ (λ (x y) ...))
@@ -32,6 +36,9 @@ Define procedures to do the following:
   (define c-int= (λ (d1 d2) ...))
   (define c-int< (λ (d1 d2) ...))
   (define c-int> (λ (d1 d2) ...))
+
+Clarification: It would be considered poor form to convert the c-ints
+into regular integers, do the requested operation, and convert back.
 
 PART B
 
@@ -70,6 +77,15 @@ Define, in "pure" Scheme, procedures to do the following:
   (define dl= (λ (d1 d2) ...))
   (define dl< (λ (d1 d2) ...))
   (define dl> (λ (d1 d2) ...))
+
+Examples:
+
+  (dl* '(4 2 0 1) '(7 3)) ⤳ (8 8 8 7 3)
+  (dl+ '(4 2 0 1) '(7 3)) ⤳ (1 6 0 1)
+  (dl< '(4 2 0 1) '(7 3)) ⤳ #f
+  (dl> '(4 2 0 1) '(7 3)) ⤳ #t
+  (dl= '(4 2 0 1) '(4 2 0 1)) ⤳ #t
+  (dl= '(4 2 0 1) '(4 2 0 1 0 0 0)) ⤳ #t
 
 Clarification: doing
 
