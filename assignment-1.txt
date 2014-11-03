@@ -1,5 +1,23 @@
 Assignment 1 - Scheme                Due: Mon 3-Nov-2014
 
+----------------------------------------------------------------
+
+General Instructions
+
+Please turn in a single file, e.g., FOO, that I can do this to:
+
+ $ mzscheme
+ > (load "FOO")
+
+Needing to massage it in order to load it in will put me in a bad
+mood.
+
+If you used test cases to check that your code works (hint: this is a
+good habit) please include them.  If this looks systematic and well
+done and automated then I will smile.
+
+----------------------------------------------------------------
+
 PART A
 
 Consider the "church encoded" representation of non-negative integers
@@ -39,6 +57,8 @@ Define, in "pure" Scheme, procedures to do the following:
 
 Clarification: It would be considered poor form to convert the c-ints
 into regular integers, do the requested operation, and convert back.
+
+----------------------------------------------------------------
 
 PART B
 
