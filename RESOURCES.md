@@ -16,6 +16,8 @@ http://racket-lang.org/ for various other platforms.
 
 "The Little Schemer" http://mitpress.mit.edu/books/little-schemer
 
+https://en.wikibooks.org/wiki/Scheme_Programming
+
 If you're hard core, read "Structure and Interpretation of Computer
 Programs" http://mitpress.mit.edu/sicp/ and/or view the accompanying
 lectures
@@ -37,3 +39,26 @@ https://en.wikipedia.org/wiki/Lambda_calculus
 http://www.cwru.edu/artsci/math/wells/pub/pdf/lambda2009.pdf
 
 https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus
+
+https://en.wikibooks.org/wiki/Lambda_Calculus
+
+Haskell
+-------
+
+"Learn you a Haskell for Great Good"
+
+"Real World Haskell"
+
+https://en.wikibooks.org/wiki/Haskell
+
+Prolog
+------
+
+https://en.wikibooks.org/wiki/Prolog
+
+Other Cool Stuff
+----------------
+
+"An Introduction to Functional Programming through Lambda Calculus" by
+Greg Michaelson is an excellent text.  And free.
+http://www.cs.rochester.edu/~brown/173/readings/LCBook.pdf
