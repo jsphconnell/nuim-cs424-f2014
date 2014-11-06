@@ -43,17 +43,20 @@ http://www.cwru.edu/artsci/math/wells/pub/pdf/lambda2009.pdf
 
 https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus
 
-https://en.wikibooks.org/wiki/Lambda_Calculus
-
-The Curry-Howard Isomorphism
+The Curry-Howard Isomorphism,
 https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence
+
+"Introduction to Lambda Calculus" by Henk Barendregt Erik Barendsen,
+ftp://ftp.cs.kun.nl/pub/CompMath.Found/lambda.pdf
 
 Haskell
 -------
 
 "Learn you a Haskell for Great Good"
+http://learnyouahaskell.com/
 
 "Real World Haskell"
+http://book.realworldhaskell.org/
 
 https://en.wikibooks.org/wiki/Haskell
 
@@ -68,3 +71,7 @@ Other Cool Stuff
 "An Introduction to Functional Programming through Lambda Calculus" by
 Greg Michaelson is an excellent text.  And free.
 http://www.cs.rochester.edu/~brown/173/readings/LCBook.pdf
+
+"Formal Syntax and Semantics of Programming Languages: A Laboratory
+Based Approach" by Kenneth Slonneger and Bary L. Kurtz is also both
+excellent and free.  http://homepage.cs.uiowa.edu/~slonnegr/plf/Book/
