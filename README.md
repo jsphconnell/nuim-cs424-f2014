@@ -49,6 +49,11 @@ https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence
 "Introduction to Lambda Calculus" by Henk Barendregt Erik Barendsen,
 ftp://ftp.cs.kun.nl/pub/CompMath.Found/lambda.pdf
 
+"The Lambda Calculus", notes by Don Blaheta
+http://cs.brown.edu/courses/cs173/2002/Lectures/2002-10-28-lc.pdf
+gives a nice short introduction to the untyped λ Calculus that starts
+with Scheme and starts simplifying and making things lazy.
+
 Haskell
 -------
 
