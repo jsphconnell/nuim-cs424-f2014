@@ -4,6 +4,12 @@
   (λ (x)
      (g (u x))))
 
+;;; in body of F, the call to U is *not*
+;;; "tail recursive", the call to G *is*
+;;; "tail recursive".
+
+;;; "tail recursive call" = "tail call"
+
 ;;; "Machine Code" for F
 
 ;;; Because "ret" = pop address off stack and jump to it ...
@@ -25,3 +31,116 @@
 ;; u:	; arg in r2
 ;;	...
 ;;	ret
+
+;;; Space requirements (stack) is O(n), i.e., O(1) for each stack
+;;; frame holding an invocation of fact1.
+(define fact1
+  (λ (n)
+     (if (= n 0)
+	 1
+	 (* n (fact1 (- n 1))))))
+
+(define fact2
+  (λ (n) (fact2-aux n 1)))
+
+;;; Theorem:
+;;;  (fact2-aux n a) = n! * a
+
+;;; Proof:
+;;;  by induction on n
+;;; case n=0
+;;;  (fact2-aux 0 a) = a
+;;; case n>0
+;;;  (fact2-aux n a)
+;;;       = (fact2-aux (- n 1) (* n a))
+;;;       = (n-1)! * (n*a)
+;;;       = n*(n-1)! * a
+;;;       = n! * a
+;;; QED
+
+;;; Space requirements (stack) is O(1)
+
+(define fact2-aux
+  (λ (n a)
+     (if (= n 0)
+	 a
+	 (fact2-aux (- n 1)
+		    (* n a)))))
+
+;;; Q: What is a procedure call?
+;;; A: (a) Marshall arguments
+;;;    (b) Push return address
+;;;    (c) Goto address of procedure
+
+;;; If tail call, skip step (b).
+;;; If no arguments, skip step (a).
+
+;;; So, tail call to procedure w/ zero args = GOTO.
+  
+;; /* look for x in sorted array a[N], return index */
+;; int search (int x)
+;; {
+;;   int lo = 0;
+;;   int hi = N;
+;;  top:
+;;   if (lo == hi)
+;;     return lo;
+;;   else
+;;     {
+;;       int mi = (lo + hi)/2;
+;;       if (a[mi] < x)
+;; 	{
+;; 	  lo = mi+1;
+;; 	  goto top;
+;; 	}
+;;       else if (a[mi] > x)
+;; 	{
+;; 	  hi = mi;
+;; 	  goto top;
+;; 	}
+;;       else
+;; 	return mi;
+;;     }
+;; }
+
+(define search
+  (λ (x)
+     (s1 x 0 N)))
+
+(define s1
+  (λ (x lo hi)
+     (cond ((= lo hi) lo)
+	   (else (s2 (floor (/ (+ lo hi) 2))
+		     lo hi x))))) 
+
+(define s1
+  (λ (mi lo hi x)
+     (cond ((< (aref a mi) x)
+	    ...))))
+
+int search (int x)
+{
+  int lo = 0;
+  int hi = N;
+ S1:
+ top:
+  if (lo == hi)
+    return lo;
+  else
+    {
+      int mi = (lo + hi)/2;
+     S2:
+      if (a[mi] < x)
+	{
+	  lo = mi+1;
+	  goto top;
+	}
+      else if (a[mi] > x)
+	{
+	  hi = mi;
+	  goto top;
+	}
+      else
+	return mi;
+    }
+}
