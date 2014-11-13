@@ -123,3 +123,6 @@
      (cond ((< (aref a mi) x) (s1 x (+ mi 1) hi))
 	   ((> (aref a mi) x) (s1 x lo mi))
 	   (else mi))))
+
+;;; Note: the goto statements are translated into procedure calls, and
+;;; tail calls (aka tail recursive calls) in particular.
