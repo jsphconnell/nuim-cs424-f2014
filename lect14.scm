@@ -103,6 +103,11 @@
 ;;     }
 ;; }
 
+;;; Mechanically translate code with:
+;;;  - goto statement
+;;;  - assignment statements
+;;; into "purely functional" code, with only procedure call/return.
+
 (define search
   (λ (x)
      (s1 x 0 N)))
@@ -113,34 +118,8 @@
 	   (else (s2 (floor (/ (+ lo hi) 2))
 		     lo hi x))))) 
 
-(define s1
+(define s2
   (λ (mi lo hi x)
-     (cond ((< (aref a mi) x)
-	    ...))))
-
-int search (int x)
-{
-  int lo = 0;
-  int hi = N;
- S1:
- top:
-  if (lo == hi)
-    return lo;
-  else
-    {
-      int mi = (lo + hi)/2;
-     S2:
-      if (a[mi] < x)
-	{
-	  lo = mi+1;
-	  goto top;
-	}
-      else if (a[mi] > x)
-	{
-	  hi = mi;
-	  goto top;
-	}
-      else
-	return mi;
-    }
-}
+     (cond ((< (aref a mi) x) (s1 x (+ mi 1) hi))
+	   ((> (aref a mi) x) (s1 x lo mi))
+	   (else mi))))
