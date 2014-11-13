@@ -80,3 +80,9 @@ http://www.cs.rochester.edu/~brown/173/readings/LCBook.pdf
 "Formal Syntax and Semantics of Programming Languages: A Laboratory
 Based Approach" by Kenneth Slonneger and Bary L. Kurtz is also both
 excellent and free.  http://homepage.cs.uiowa.edu/~slonnegr/plf/Book/
+
+"Lisp in Small Pieces" (aka the L.i.S.P. book, a translation of "Les
+Langages Lisp") by Christian Queinnec
+http://pagesperso-systeme.lip6.fr/Christian.Queinnec/WWW/LiSP.html
+starts with a short Scheme interpreter and riffs its way to
+denotational semantics, compilation, and an object system.
