@@ -41,7 +41,11 @@ https://en.wikipedia.org/wiki/Lambda_calculus
 λ-Calculus class notes by Prof Charles Wells:
 http://www.cwru.edu/artsci/math/wells/pub/pdf/lambda2009.pdf
 
+The Simply Typed λ Calculus,
 https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus
+
+System F,
+https://en.wikipedia.org/wiki/System_F
 
 The Curry-Howard Isomorphism,
 https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence
@@ -86,3 +90,5 @@ Langages Lisp") by Christian Queinnec
 http://pagesperso-systeme.lip6.fr/Christian.Queinnec/WWW/LiSP.html
 starts with a short Scheme interpreter and riffs its way to
 denotational semantics, compilation, and an object system.
+
+http://landoflisp.com/
