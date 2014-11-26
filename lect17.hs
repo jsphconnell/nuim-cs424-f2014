@@ -4,6 +4,8 @@
 -- with parens, (+) or (<).
 
 -- Super slow Fibonacci Numbers:
+-- Type will default to Int or Double if it can, 
+-- or we can use Type Declarations (below)
 -- fib1 :: Int -> Integer
 -- fib1 :: Int -> Double
 fib1 :: Num a => Int -> a
@@ -14,14 +16,22 @@ fib1 n = fib1 (n-1) + fib1 (n-2)
 -- Faster Fibonacci Numbers via Tail Recursion:
 fib2 0 = 1
 fib2 n = fibTail 1 1 1 n
-  where
+  where -- "where" clause allows us to locally scope things
     -- fibTail returns (fib n), but
     -- fi must be (fib i), fim1 must be (fib (i-1)), i<=n, 
     fibTail i fi fim1 n | i<n = fibTail (i+1) (fi+fim1) fi n
     fibTail i fi fim1 n | i==n = fi
 
+-- [0..] is syntax for an infinite list of ints
+-- To take 10 numbers from an infinite list of ints we can write
+-- take(10) [0..]
+-- Below, we're using a list to store al the fibonacci numbers
+-- However, it computes each fib number separately... a bit redundant
 fibs1 = map fib2 [0..]
 
+--- Here we give it the 1st and 2nd element of the fib numbers,
+--- It then computes the 3rd element by using 1st and 2nd,
+--- computes the 4th element by using 2nd and 3rd element etc....
 fibs2 = 1:1:(zipWith (+) fibs2 (tail fibs2))
 
 {-
@@ -43,7 +53,7 @@ Prelude> zipWith (+) [0,10,2,30,4] [3,4,5,90,1]
   \x->x*2
   which means the same as the Scheme: (lambda (x) (* x 2))     
 
-"Slices":
+"Slices": really cool, should be adopted by other languages..
 
 Prelude> (2/) 10
 0.2
@@ -70,8 +80,9 @@ This is efficient, even when enormousString is contents of enormous file
 
 -}
 
+-- Now some interesting things with Algebraic Data Types
 data Mebe = Joost Double | Nada
-          deriving Show
+          deriving Show -- tells it how to print
 addMebe :: Mebe -> Mebe -> Mebe
 addMebe (Joost x) (Joost y) = Joost (x+y)
 addMebe Nada _ = Nada           -- _ is "unused variable don't warn me"
