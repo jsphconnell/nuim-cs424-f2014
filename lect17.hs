@@ -4,7 +4,7 @@
 -- with parens, (+) or (<).
 
 -- Super slow Fibonacci Numbers:
--- Type will default to Int or Double if it can, 
+-- Type will default to Integer or Double if it can, 
 -- or we can use Type Declarations (below)
 -- fib1 :: Int -> Integer
 -- fib1 :: Int -> Double
