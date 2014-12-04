@@ -79,7 +79,18 @@ pythsLM''' n =
                                >>= (\z -> guard' (x^2 + y^2 == z^2)
                                           >> return (x,y,z))))
 
--- Example of lsit monad
+-- Example of list monad
 
 -- Prelude> [1,4,6] >>= (\x -> take x (repeat (x^2)))
 -- [1,16,16,16,16,36,36,36,36,36,36]
+
+interleave :: [a] -> [a] -> [a]
+interleave [] ys = ys
+interleave xs [] = xs
+interleave (x:xs) ys = x:interleave ys xs
+
+interleaveToInfinity :: [[a]] -> [a]
+interleaveToInfinity xss = foldl interleave [] xss
+
+-- *Main> take 100 $ interleaveToInfinity [[n,2*n..] | n <- [1..]]
+-- ^CInterrupted.
