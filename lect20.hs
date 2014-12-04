@@ -78,3 +78,8 @@ pythsLM''' n =
                                >> [1..n]
                                >>= (\z -> guard' (x^2 + y^2 == z^2)
                                           >> return (x,y,z))))
+
+-- Example of lsit monad
+
+-- Prelude> [1,4,6] >>= (\x -> take x (repeat (x^2)))
+-- [1,16,16,16,16,36,36,36,36,36,36]
