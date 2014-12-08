@@ -86,11 +86,10 @@ pythsLM''' n =
 
 interleave :: [a] -> [a] -> [a]
 interleave [] ys = ys
-interleave xs [] = xs
 interleave (x:xs) ys = x:interleave ys xs
 
 interleaveToInfinity :: [[a]] -> [a]
-interleaveToInfinity xss = foldl interleave [] xss
+interleaveToInfinity xss = foldr interleave [] xss
 
--- *Main> take 100 $ interleaveToInfinity [[n,2*n..] | n <- [1..]]
--- ^CInterrupted.
+-- *Main> take 100 $ interleaveToInfinity [[10^i..]|i<-[0..]]
+-- [1,10,2,100,3,11,4,1000,5,12,6,101,7,13,8,10000,9,14,10,102,11,15,12,1001,13,16,14,103,15,17,16,100000,17,18,18,104,19,19,20,1002,21,20,22,105,23,21,24,10001,25,22,26,106,27,23,28,1003,29,24,30,107,31,25,32,1000000,33,26,34,108,35,27,36,1004,37,28,38,109,39,29,40,10002,41,30,42,110,43,31,44,1005,45,32,46,111,47,33,48,100001,49,34,50,112]
