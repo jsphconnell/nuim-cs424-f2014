@@ -29,6 +29,7 @@ mortal(X) :- man(X).		% read as:
 male(barak).
 male(fishel).
 parent(fishel,barak).
+parent(fishel,nili).
 parent(jacob,fishel).
 male(jacob).
 parent(toba,fishel).
@@ -36,6 +37,8 @@ female(toba).
 
 %% Rules:
 father(X,Y) :- parent(X,Y), male(X).
+sibling(X,X) :- !, fail.   % ! = "cut", cut off alternative proofs
+			   % unfortunately, cuts off good stuff too...
 sibling(X,Y) :- parent(Z,X), parent(Z,Y).
 grandparent(X,Y) :- parent(X,Z), parent(Z,Y).
 grandfather(X,Y) :- grandparent(X,Y), male(X).
