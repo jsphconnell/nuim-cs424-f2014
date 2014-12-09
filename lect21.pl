@@ -37,11 +37,12 @@ female(toba).
 
 %% Rules:
 father(X,Y) :- parent(X,Y), male(X).
-sibling(X,X) :- !, fail.   % ! = "cut", cut off alternative proofs
-			   % unfortunately, cuts off good stuff too...
-sibling(X,Y) :- parent(Z,X), parent(Z,Y).
+sibling(X,Y) :- parent(Z,X), parent(Z,Y), notEqual(X,Y).
 grandparent(X,Y) :- parent(X,Z), parent(Z,Y).
 grandfather(X,Y) :- grandparent(X,Y), male(X).
+
+notEqual(X,X) :- !, fail.
+notEqual(_,_).
 
 %% Home brew lists
 %% empty list = nil
