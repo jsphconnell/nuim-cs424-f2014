@@ -30,6 +30,8 @@ male(barak).
 male(fishel).
 parent(fishel,barak).
 parent(fishel,nili).
+parent(frances, nili).
+female(frances).
 parent(jacob,fishel).
 male(jacob).
 parent(toba,fishel).
