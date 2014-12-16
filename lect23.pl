@@ -21,24 +21,27 @@
 
 %% predicates:
 %%   typed(e)        % λ-calc expr e is well typed.
-%%   oftype(e,t)     % λ-calc expr e has type t
+%%   oftype(e,env,t) % λ-calc expr e has type t in type environment env
+%% type environment: list of variable/type lists.
+%% E.g., [[x,r],[y,r],[z,arr(r,r)]]
 
-typed(E) :- oftype(E,_).
-oftype(app(E1,E2),T2) :- oftype(E1,arr(T1,T2)), oftype(E2,T1).
-oftype(lambda(V,T1,E), arr(T1,T2)) :- oftype(E,T2).
-oftype(0,r).			% 0 : R
-oftype(1,r).			% 1 : R
-oftype(sin,arr(r,r)).		% sin : R->R
-oftype(plus,arr(r,arr(r,r))).	% plus: R->R->R
+typed(E) :- oftype(E,[],_).
+oftype(app(E1,E2), Env, T2) :-
+	oftype(E1, Env, arr(T1,T2)),
+	oftype(E2, Env, T1).
+oftype(lambda(V,T1,Body), Env, arr(T1,T2)) :-
+	oftype(Body, [[V,T1]|Env], T2).
+oftype(0,_,r).			% 0 : R
+oftype(1,_,r).			% 1 : R
+oftype(sin,_,arr(r,r)).		% sin : R->R
+oftype(plus,_,arr(r,arr(r,r))).	% plus: R->R->R
+oftype(V,Env,T) :- member([V,T],Env).
 
 %% | ?- oftype(app(plus,1),T).
 %% T = arr(r,r)
-%% yes
+
 %% | ?- oftype(lambda(v,TV,app(app(plus,1),1)), T).
 %% T = arr(TV,r)
-%% yes
 
-%% BUG: need to be aware of 
-%%  | ?- oftype(lambda(v,TV,v), T).                 
-%%  no   % should be T=arr(TV,TV)
-%% need to make oftype aware of types of variables in scope.
+%% | ?- oftype(lambda(v,TV,v), [], T).
+%% T = arr(TV,TV) ? ;
