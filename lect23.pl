@@ -21,20 +21,30 @@
 
 %% predicates:
 %%   typed(e)        % λ-calc expr e is well typed.
+%%      API: typed/1(+)
 %%   oftype(e,env,t) % λ-calc expr e has type t in type environment env
+%%      API: oftype(+,+,-)
 %% type environment: list of variable/type lists.
 %% E.g., [[x,r],[y,r],[z,arr(r,r)]]
 
 typed(E) :- oftype(E,[],_).
-oftype(app(E1,E2), Env, T2) :-
-	oftype(E1, Env, arr(T1,T2)),
-	oftype(E2, Env, T1).
-oftype(lambda(V,T1,Body), Env, arr(T1,T2)) :-
-	oftype(Body, [[V,T1]|Env], T2).
+
+%% types of basis symbols 
 oftype(0,_,r).			% 0 : R
 oftype(1,_,r).			% 1 : R
 oftype(sin,_,arr(r,r)).		% sin : R->R
 oftype(plus,_,arr(r,arr(r,r))).	% plus: R->R->R
+
+%% type of an application
+oftype(app(E1,E2), Env, T2) :-
+	oftype(E1, Env, arr(T1,T2)),
+	oftype(E2, Env, T1).
+
+%% type of a lambda expression
+oftype(lambda(V,T1,Body), Env, arr(T1,T2)) :-
+	oftype(Body, [[V,T1]|Env], T2).
+
+%% type of a variable
 oftype(V,Env,T) :- member([V,T],Env).
 
 %% | ?- oftype(app(plus,1),T).
