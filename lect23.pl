@@ -45,7 +45,7 @@ oftype(lambda(V,T1,Body), Env, arr(T1,T2)) :-
 	oftype(Body, [[V,T1]|Env], T2).
 
 %% type of a variable
-oftype(V,Env,T) :- member([V,T],Env).
+oftype(V,Env,T) :- member([V,T],Env), !.
 
 %% | ?- oftype(app(plus,1),T).
 %% T = arr(r,r)
@@ -55,3 +55,11 @@ oftype(V,Env,T) :- member([V,T],Env).
 
 %% | ?- oftype(lambda(v,TV,v), [], T).
 %% T = arr(TV,TV) ? ;
+
+%% BUG:
+%%  | ?- oftype(x, [[a,ta],[b,tb],[x,tx],[c,tc],[x,foo]], T).
+%%  T = tx ? ;
+%%  T = foo ? ;
+%% Earlier occurance of x in type environment should override
+%% later occurance.
+%% Fix by adding cut (!)
