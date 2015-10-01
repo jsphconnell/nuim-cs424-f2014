@@ -1,0 +1,63 @@
+Assignment 2
+
+----------------------------------------------------------------
+
+General Instructions
+
+Please turn in a single file for each language which you write code in.
+I should be able to load the file (:l foo.hs in Haskell, or
+consult('foo.pl') in Prolog) cleanly and test the code.
+
+Part 1. λ-Calculus
+
+   Reduce the following expression to normal form.  Show the sequence
+   of reductions.  Including renaming a lambda parameter (α-renaming)
+   to avoid collisions during ϐ-reduction.  Recall that "e1 e2 e3" is
+   short for "(e1 e2) e3".
+
+	  (λ f . λ x . f (f x))
+	  (λ x . x (λ x . λ y . x))
+	  ((λ x . λ y . λ z . z x y)
+	   ((λ x . λ y . λ z . z x y) a c)
+	   ((λ y . λ z . λ x . x y z) b d))
+
+Part 2. Haskell
+
+    This is similar to Assignment 1, but in Haskell, where lazy lists
+    make it much cooler.
+
+    Consider representing a non-negative number as a list of base-10
+    digits, least significant first.  So the number 365 would be
+    [5,6,3].  Trailing zeros are allowed, and make no difference in
+    the value.  I will call such a number a Lnat, for "list natural nubmer".
+
+    Define functions
+
+     addLnat :: [Int] -> [Int] -> [Int]
+     mulLnat :: [Int] -> [Int] -> [Int]
+
+    which add and multiply such numbers, respectively.  So for example,
+
+     addLnat [5,6,3] [7,4,5] = [2,1,9]
+
+    unless there are trailing zeros, which are okay.
+
+    These functions should work even if the inputs are infinite lists
+    of digits, producing infinite lists on their output of course.
+
+    Addendum of Interest: Note that this would mean
+
+      addLnat (repeat 9) [1] = repeat 0
+
+    so in some sense an infinite string of 9s is the additive inverse
+    of the number 1, so we might say that it is equal to -1.
+
+
+Part 3. Prolog
+
+    Define a predicate concat/2 which is true if its first argument is
+    a list of non-empty lists whose elements concatenated together
+    form the second argument.  Examples:
+
+      concat([[a],[b,c,d],[e,[f,g],h]], [a,b,c,d,e,[f,g],h]).
+      concat([],[]).

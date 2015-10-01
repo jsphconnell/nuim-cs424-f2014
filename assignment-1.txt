@@ -1,0 +1,117 @@
+Assignment 1 - Scheme                Due: 09:00 Tue 4-Nov-2014
+
+----------------------------------------------------------------
+
+General Instructions
+
+Please turn in a single file, e.g., FOO, that I can do this to:
+
+ $ mzscheme
+ > (load "FOO")
+
+Needing to massage it in order to load it in will put me in a bad
+mood.
+
+If you used test cases to check that your code works (hint: this is a
+good habit) please include them.  If this looks systematic and well
+done and automated then I will smile.
+
+----------------------------------------------------------------
+
+PART A
+
+Consider the "church encoded" representation of non-negative integers
+we exhibited in class, where 5 was represented as
+
+  (define church-5 (λ (f) (λ (x) (f (f (f (f (f x))))))))
+
+First, consider modifying the representation to be able to handle both
+positive and negative numbers, as follows.
+
+  (define c-int-positive-5 (λ (f g) (λ (x) (f (f (f (f (f x))))))))
+
+  (define c-int-negative-3 (λ (f g) (λ (x) (g (g (g x))))))
+
+The idea is that an integer N is represented as a function that takes
+two functions, f and g, and returns a function that applies f N times
+when N≥0 or g |N| times when N≤0.
+
+Define, in "pure" Scheme, procedures to do the following:
+
+  ;;; add two numbers
+  (define c-int+ (λ (x y) ...))
+
+  ;;; subtract two numbers
+  (define c-int- (λ (x y) ...))
+
+  ;;; multiply two numbers
+  (define c-int* (λ (x y) ...))
+
+  ;;; power (the second arg must be non-negative)
+  (define c-int-expt (λ (x n) ...))
+
+  ;;; comparison
+  (define c-int= (λ (d1 d2) ...))
+  (define c-int< (λ (d1 d2) ...))
+  (define c-int> (λ (d1 d2) ...))
+
+Clarification: It would be considered poor form to convert the c-ints
+into regular integers, do the requested operation, and convert back.
+
+----------------------------------------------------------------
+
+PART B
+
+Consider a representation of non-negative integers as a list of
+base-10 digits, in "little endian" order.  So the number 1024 would be
+represented as the list
+
+  (4 2 0 1)
+
+and the number one million would be represented as
+
+  (0 0 0 0 0 0 1)
+
+We will call this a dlnat, for "Digit List Natural Number".
+
+(Aside: this representation is ambiguous because trailing zeros do not
+affect the value represented.  So an alternative representation of
+1024 would be 1024 = 00001024 or (4 2 0 1 0 0 0 0).  Try to avoid
+trailing zeros, but don't go crazy on the issue.)
+
+Define, in "pure" Scheme, procedures to do the following:
+
+  ;;; takes a non-negative integer, returns corresponding dlnat
+  (define nat-to-dlnat (λ (x) ...))
+
+  ;;; takes a dlnat, returns corresponding integer
+  (define dlnat-to-nat (λ (d) ...))
+
+  ;;; add two dlnats
+  (define dl+ (λ (d1 d2) ...))
+
+  ;;; multiply two dlnats
+  (define dl+ (λ (d1 d2) ...))
+
+  ;;; compare two dlnats
+  (define dl= (λ (d1 d2) ...))
+  (define dl< (λ (d1 d2) ...))
+  (define dl> (λ (d1 d2) ...))
+
+Examples:
+
+  (dl* '(4 2 0 1) '(7 3)) ⤳ (8 8 8 7 3)
+  (dl+ '(4 2 0 1) '(7 3)) ⤳ (1 6 0 1)
+  (dl< '(4 2 0 1) '(7 3)) ⤳ #f
+  (dl> '(4 2 0 1) '(7 3)) ⤳ #t
+  (dl= '(4 2 0 1) '(4 2 0 1)) ⤳ #t
+  (dl= '(4 2 0 1) '(4 2 0 1 0 0 0)) ⤳ #t
+
+Clarification: doing
+
+  (define dl+ (λ (d1 d2) (nat-to-dlnat (+ (dlnat-to-nat d1) (dlnat-to-nat d2)))))
+  (define dl< (λ (d1 d2) (< (dlnat-to-nat d1) (dlnat-to-nat d2))))
+
+is not considered a proper solution.  Imagine you are doing this on a
+system where the built-in functions + and * restrict their inputs to
+the ballpark of one decimal digit.
